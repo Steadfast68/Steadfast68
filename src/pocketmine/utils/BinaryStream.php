@@ -48,9 +48,6 @@ class BinaryStream {
 	
 	public function __construct($buffer = "", $offset = 0) {
 		$this->setBuffer($buffer, $offset);
-		// if (method_exists($this, 'pname')) {
-		// 	var_dump($this->pname());
-		// }
 	}
 
 	public function reset() {

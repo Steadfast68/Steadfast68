@@ -1057,7 +1057,6 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 		$packet->setDeviceId($this->getDeviceOS());
 				
 		$packet->encode($this->protocol);
-		
 		$this->packetQueue[] = $packet->getBuffer();
 		$packet->senderSubClientID = 0;
 		return true;
@@ -1074,20 +1073,8 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 		if (count($this->packetQueue) <= 0 && count($this->inventoryPacketQueue) <= 0) {
 			return;
 		}
-		//for debug
-		var_dump('to client');		
 		$buffer = '';
 		foreach ($this->packetQueue as $pkBuf) {
-			//for debug
-			var_dump(ord($pkBuf{0}));
-			if (strlen($pkBuf) > 1000) {
-				var_dump(strlen($pkBuf));
-			} else {
-				var_dump($pkBuf);
-			}
-			if (ord($pkBuf{0}) == 9) {
-				exit;
-			}
 			$buffer .= Binary::writeVarInt(strlen($pkBuf)) . $pkBuf;
 		}
 		foreach ($this->inventoryPacketQueue as $pk) {
@@ -5121,7 +5108,7 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 			$buffer .= Binary::writeVarInt(strlen($pkBuf)) . $pkBuf;
 		}
 		$pk = new BatchPacket();
-		$pk->payload = zlib_encode($buffer, ZLIB_ENCODING_RAW, 7);
+		$pk->payload = zlib_encode($buffer, ZLIB_ENCODING_DEFLATE, 7);
 		$this->dataPacket($pk);
 	}
 
