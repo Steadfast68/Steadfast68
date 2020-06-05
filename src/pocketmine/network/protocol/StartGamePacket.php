@@ -77,8 +77,8 @@ class StartGamePacket extends PEPacket{
 			$this->putString('');
 		}
 		if ($playerProtocol >= Info::PROTOCOL_406) {
-			//$this->putShort(0); //SpawnSettingsType
-			$this->putByte(0);
+			$this->putShort(0); //SpawnSettingsType
+			//$this->putByte(0);
 			$this->putString(''); //User Difined Biome type
 		}
 	
