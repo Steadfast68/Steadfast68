@@ -297,6 +297,7 @@ class Network {
 		switch ($playerProtocol) {
 			case Info::PROTOCOL_407:
 			case Info::PROTOCOL_406:
+			    return Info::PROTOCOL_406;
 			case Info::PROTOCOL_400:
 			case Info::PROTOCOL_393:
 			case Info::PROTOCOL_392:

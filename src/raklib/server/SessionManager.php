@@ -225,13 +225,13 @@ class SessionManager{
                 $buf = $stream->getString();
                 
                 // debug
-                var_dump('from client');
-                var_dump(ord($buf{0}));          
-                if (strlen($buf) > 1000) {
-                    var_dump(strlen($buf));
-                } else {
-                    var_dump($buf);
-                }
+//                var_dump('from client');
+//                var_dump(ord($buf{0}));
+//                if (strlen($buf) > 1000) {
+//                    var_dump(strlen($buf));
+//                } else {
+//                    var_dump($buf);
+//                }
 				if (empty($buf) || $buf == $spamPacket || $buf == $spamPacket2) {
 					continue;
 				}
@@ -319,7 +319,7 @@ class SessionManager{
             if($id === RakLib::PACKET_ENCAPSULATED){
                 $len = ord($packet{$offset++});
                 $identifier = substr($packet, $offset, $len);
-                var_dump('iden' . $identifier);
+//                var_dump('iden' . $identifier);
                 //var_dump(debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 20));             
                 $offset += $len;
                 if(isset($this->sessions[$identifier])){
