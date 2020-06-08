@@ -3318,33 +3318,33 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 			$this->dead = true;
 		}
 
-//		if (!empty(self::$availableCommands)) {
-//			$pk = new AvailableCommandsPacket();  ???
-//			$this->dataPacket($pk);
-//		}
+		if (!empty(self::$availableCommands)) {
+			$pk = new AvailableCommandsPacket();
+			$this->dataPacket($pk);
+		}
 		if($this->getHealth() <= 0){
 			$this->dead = true;
 		}
 
 		$this->server->getLogger()->info(TextFormat::AQUA . $this->username . TextFormat::WHITE . "/" . TextFormat::AQUA . $this->ip . " connected");
 
-//		if ($this->getPlayerProtocol() >= Info::PROTOCOL_392) {
-//			$pk = new CreativeItemsListPacket();
-//			$pk->groups = Item::getCreativeGroups();
-//			$pk->items = Item::getCreativeItems();
+		if ($this->getPlayerProtocol() >= Info::PROTOCOL_392) {
+			$pk = new CreativeItemsListPacket();
+			$pk->groups = Item::getCreativeGroups();
+			$pk->items = Item::getCreativeItems();
 //			$this->dataPacket($pk);
-//		} else {
-//			$slots = [];
-//			foreach(Item::getCreativeItems() as $item){
-//				$slots[] = clone $item['item'];
-//			}
-//			$pk = new InventoryContentPacket();
-//			$pk->inventoryID = Protocol120::CONTAINER_ID_CREATIVE;
-//			$pk->items = $slots;
-//			$this->dataPacket($pk);
-//		}
+		} else {
+			$slots = [];
+			foreach(Item::getCreativeItems() as $item){
+				$slots[] = clone $item['item'];
+			}
+			$pk = new InventoryContentPacket();
+			$pk->inventoryID = Protocol120::CONTAINER_ID_CREATIVE;
+			$pk->items = $slots;
+			$this->dataPacket($pk);
+		}
 
-//		$this->server->sendRecipeList($this);
+		$this->server->sendRecipeList($this);
 
 		$this->sendSelfData();
 		$this->updateSpeed($this->movementSpeed);
