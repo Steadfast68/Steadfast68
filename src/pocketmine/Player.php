@@ -971,17 +971,6 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 			$packet->senderSubClientID = $this->subClientId;
 			return $this->parent->dataPacket($packet);
 		}
-		$a = [
-//            'SET_ENTITY_DATA_PACKET',
-//            'UPDATE_ATTRIBUTES_PACKET',
-//            'ADVENTURE_SETTINGS_PACKET',
-//            'SET_TIME_PACKET'
-        ];
-		if (in_array($packet->pname(), $a)) {
-		    return;
-        }
-
-		var_dump($packet->pname() . " " . __FILE__. ": " . __LINE__);
 		switch($packet->pname()){
 			case 'INVENTORY_CONTENT_PACKET':
 				$queueKey = $packet->pname() . $packet->inventoryID;
@@ -1073,7 +1062,6 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 	}
 
 	public function addBufferToPacketQueue($buffer) {
-//	    return;
 		if($this->connected === false){
 			return false;
 		}
@@ -1084,17 +1072,8 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 		if (count($this->packetQueue) <= 0 && count($this->inventoryPacketQueue) <= 0) {
 			return;
 		}
-		//for debug
-		var_dump('to client');		
 		$buffer = '';
 		foreach ($this->packetQueue as $pkBuf) {
-			//for debug
-//			var_dump(ord($pkBuf{0}));
-//		    if (strlen($pkBuf) > 1000) {
-//				var_dump(strlen($pkBuf));
-//			} else {
-//				var_dump($pkBuf);
-//			}
 			$buffer .= Binary::writeVarInt(strlen($pkBuf)) . $pkBuf;
 		}
 		foreach ($this->inventoryPacketQueue as $pk) {
@@ -1123,8 +1102,7 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 			return false;
 		}
 
-        var_dump($packet->pname() . " " . __FILE__ . ": " . __LINE__);
-		if ($this->subClientId > 0 && $this->parent != null) {
+        if ($this->subClientId > 0 && $this->parent != null) {
 			$packet->senderSubClientID = $this->subClientId;
 			return $this->parent->dataPacket($packet);
 		}
@@ -1754,7 +1732,6 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 			return;
 		}
 
-//        var_dump("----- " . $packet->pname() . " " . __FILE__. ": " . __LINE__);
 		switch($packet->pname()){
             case 'SET_PLAYER_GAMETYPE_PACKET':
                 file_put_contents("./logs/possible_hacks.log", date('m/d/Y h:i:s a', time()) . " SET_PLAYER_GAMETYPE_PACKET " . $this->username . PHP_EOL, FILE_APPEND | LOCK_EX);
@@ -3154,7 +3131,6 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 	}
 
 	public function completeLogin() {
-//	    debug_print_backtrace(5,5);
 		if ($this->loginCompleted) {
 			return;
 		}
@@ -3332,7 +3308,7 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 			$pk = new CreativeItemsListPacket();
 			$pk->groups = Item::getCreativeGroups();
 			$pk->items = Item::getCreativeItems();
-//			$this->dataPacket($pk);
+			$this->dataPacket($pk);
 		} else {
 			$slots = [];
 			foreach(Item::getCreativeItems() as $item){
@@ -3348,13 +3324,7 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 
 		$this->sendSelfData();
 		$this->updateSpeed($this->movementSpeed);
-//		$this->sendFullPlayerList();
-//		$this->updateExperience(0, 100);
-
-//        echo "DFDFDFDFDDF\n";
-//        sleep(10);
-//        echo "DFDFDFDFDDF3333\n";
-//		$this->getInventory()->addItem(Item::get(Item::ENCHANTMENT_TABLE), Item::get(Item::DYE, 4, 64), Item::get(Item::IRON_AXE), Item::get(Item::IRON_SWORD));
+		$this->sendFullPlayerList();
 	}
 
 

@@ -131,7 +131,7 @@ class PlayerListPacket extends PEPacket{
 					}
 				}
 				if ($playerProtocol >= Info::PROTOCOL_406) {
-					$this->putByte(1); // is trusted skin
+					$this->putByte(1); // is trusted skin                  
 				}
 				break;
 			case self::TYPE_REMOVE:
