@@ -5387,4 +5387,8 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 		return ZLIB_ENCODING_DEFLATE;
 	}
 
+	public static function needRawCompression($protocol) {
+		return (int)$protocol >= 406 ? 1 : 0;
+	}
+
 }

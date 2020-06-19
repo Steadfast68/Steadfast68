@@ -42,9 +42,9 @@ class ChunkMaker extends Thread {
 	}
 
 	public function sendData($data, $buffer) {
-		if (!is_null($this->proxy) && !empty($data['proxySessionId']) && !empty($data['proxyId'])) {
+		if (!is_null($this->proxy) && !empty($data['proxySessionId']) && !empty($data['proxyId']) && !empty($data['playerProtocol'])) {
 			$infoData = pack('N', $data['proxySessionId']) . chr(ProxyInterface::STANDART_PACKET_ID) . $buffer;
-			$info = chr(strlen($data['proxyId'])) . $data['proxyId'] . $infoData;
+			$info = Player::needRawCompression($data['playerProtocol']) . chr(strlen($data['proxyId'])) . $data['proxyId'] . $infoData;
 			$this->proxy->writeToProxyServer($info);
 		} elseif(!is_null($this->raklib)) {
 			$identifier = $data['identifier'];

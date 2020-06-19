@@ -76,7 +76,9 @@ class RemoteProxyServer {
 			if (strlen($buffer) > 512) {
 				$data = zlib_encode($buff, $zlibEncoding, 7);
 			} else {
+
 				$data = zlib_encode($buff, $zlibEncoding, 0);
+				//$data = $this->fakeZlib($buff);
 			}
 			$data = substr($buffer, 0, 4) . chr($flags) . $data;
 			$this->writeQueue[] = pack('N', strlen($data)) . $data;

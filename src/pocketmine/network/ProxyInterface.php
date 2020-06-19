@@ -143,10 +143,8 @@ class ProxyInterface implements AdvancedSourceInterface {
 			} else {
 				$infoData = pack('N', $player->proxySessionId) . chr(self::STANDART_PACKET_ID | RemoteProxyServer::FLAG_NEED_ZLIB) . $buffer;
 			}
-			$needRaw = 1;
-			if($player->getPlayerProtocol() < 407) $needRaw = 0;
 
-			$info = $needRaw . chr(strlen($player->proxyId)) . $player->proxyId . $infoData;
+			$info = Player::needRawCompression($player->getPlayerProtocol()) . chr(strlen($player->proxyId)) . $player->proxyId . $infoData;
 			
 			$this->proxyServer->writeToProxyServer($info);
 		}
@@ -159,7 +157,7 @@ class ProxyInterface implements AdvancedSourceInterface {
 	public function putReadyPacket($player, $buffer) {
 		if (isset($this->session[$player->getIdentifier()])) {	
 			$infoData = pack('N', $player->proxySessionId) . chr(self::STANDART_PACKET_ID) . $buffer;
-			$info = chr(strlen($player->proxyId)) . $player->proxyId . $infoData;
+			$info = player::needRawCompression($player->getPlayerProtocol()) . chr(strlen($player->proxyId)) . $player->proxyId . $infoData;
 			$this->proxyServer->writeToProxyServer($info);
 		}
 	}
