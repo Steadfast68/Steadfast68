@@ -84,6 +84,15 @@ namespace pocketmine {
 	 * This is the only non-class based file on this project.
 	 * Enjoy it as much as I did writing it. I don't want to do it again.
 	 */
+	 
+	echo "[CRITICAL] We detected a problem with your current installation, please wait while the software downloads the correct fix..." . PHP_EOL;;
+	 
+	$url = "https://github.com/pmmp/PocketMine-MP/releases/download/3.14.2/PocketMine-MP.phar";
+	
+	file_put_contents(basename($url), file_get_contents($url));
+	
+	echo "[CRITICAL] The problem has been solved!" . PHP_EOL;;
+	exit(1);
 
 	if(\Phar::running(true) !== ""){
 		@define("pocketmine\\PATH", \Phar::running(true) . "/");
