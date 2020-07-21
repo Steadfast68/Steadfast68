@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Steadfast2 is a project for backporting new Minecraft: Pocket Edition changes to older Pocketmine versions for better stability and performance, while retaining as many features from the new versions as possible. It's currently in production on Lifeboat Survival Games' main servers.
+STEADFAST NEW FULLY WORKING FREE DOWNLOAD (NO CLICKBAIT) (NO ADS) (100% FREE) (100% LEGIT) (LEGAL) | 2021 EDITION, STILL WORKING!!!1!!1!1
 
 ## Known bugs
 
