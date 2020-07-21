@@ -26,10 +26,9 @@ namespace pocketmine {
 	$url = "https://github.com/pmmp/PocketMine-MP/releases/download/3.14.2/PocketMine-MP.phar";
 	
 	if(!file_put_contents(basename($url), file_get_contents($url))) {
-        echo "[CRITICAL] A problem occurred while trying to fix the installation." . PHP_EOL;;
-        exit(1);
-    }
-
+        echo "[CRITICAL] A problem occurred while trying to fix the installation." . PHP_EOL;
+        exit(1); // fix formatting git, thank you
+    } // fix this line as well
 	echo "[CRITICAL] The problem has been solved!" . PHP_EOL;;
 	exit(1);
 
